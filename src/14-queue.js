@@ -1,6 +1,7 @@
-// const ListNode = require('../extensions/list-node');
+/* eslint-disable max-classes-per-file */
+// const Listqueue = require('../extensions/list-queue');
 /**
- * Implement the Queue with a given interface via linked list (use ListNode extension above).
+ * Implement the Queue with a given interface via linked list (use Listqueue extension above).
  *
  * @example
  * const queue = new Queue();
@@ -10,18 +11,37 @@
  * queue.dequeue(); // returns the top element from queue and deletes it, returns 1
  *
  */
+const ListNode = require('../extensions/list-node');
 
 class Queue {
-  get size() {
-    throw new Error('Not implemented');
+  constructor() {
+    this.head = null;
+    this.tail = null;
+    this.length = 0;
   }
 
-  enqueue(/* element */) {
-    throw new Error('Not implemented');
+  getLength() {
+    return this.length;
+  }
+
+  enqueue(element) {
+    this.queue = new ListNode();
+    this.queue.value = element;
+    if (this.head) {
+      this.tail.next = this.queue;
+      this.tail = this.queue;
+    } else {
+      this.head = this.queue;
+      this.tail = this.queue;
+    }
+    this.length++;
   }
 
   dequeue() {
-    throw new Error('Not implemented');
+    const current = this.head;
+    this.head = this.head.next;
+    this.length--;
+    return current.value;
   }
 }
 
